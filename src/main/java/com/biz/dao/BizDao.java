@@ -14,6 +14,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.biz.dao.entity.BookEntity;
 
+/**
+ * 
+ * @author Nagendra
+ *
+ */
 public class BizDao  implements IBizDao{
 	
 	private DataSource dataSource;
