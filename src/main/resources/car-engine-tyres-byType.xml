@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="car" class="com.spring.model.Car" autowire="byType">
+		<property name="name" value="Audi" />
+		<property name="color" value="black" />
+	</bean>
+	
+	<bean id="engine" class="com.spring.model.Engine" primary="true">
+		<property name="price" value="100000" />
+		<property name="eid" value="EPio9338373" />
+		<property name="model" value="M9283873"/>
+	</bean>
+	
+	<bean id="pengine" class="com.spring.model.Engine">
+		<property name="price" value="300000" />
+		<property name="eid" value="OWIWPio9338373" />
+		<property name="model" value="M90093453"/>
+	</bean>
+	
+	<bean id="tyres" class="com.spring.model.Tyres">
+		<property name="price" value="300000" />
+		<property name="not" value="6" />
+		<property name="vendor" value="MRF"/>
+	</bean>
+
+</beans>
