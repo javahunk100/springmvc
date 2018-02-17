@@ -10,6 +10,14 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  <!-- ApplicationContext context=new ClasspathXMLApplicationContext("/WEB-INF/applicationContext.xml"); 
+  This container will manage all the services required for the project like service layer , dao layer , datasource , jdbc template etc
+  /WEB-INF/applicationContext.xml
+  -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
   <servlet>
   	<servlet-name>library-tech</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

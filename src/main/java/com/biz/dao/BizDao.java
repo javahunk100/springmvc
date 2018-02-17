@@ -9,8 +9,11 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.biz.dao.entity.BookEntity;
 
@@ -24,9 +27,13 @@ import com.biz.dao.entity.BookEntity;
  * 
  *
  */
+@Repository("BizDao")
 public class BizDao  implements IBizDao{
 	
 	private DataSource dataSource;
+	
+	@Autowired
+	@Qualifier("mjdbcTemplate")
 	private JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {

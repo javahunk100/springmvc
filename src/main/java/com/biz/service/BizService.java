@@ -1,13 +1,23 @@
 
 package com.biz.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.biz.dao.BizDao;
 import com.biz.dao.entity.BookEntity;
+import com.library.web.controller.model.BookForm;
 
-public class BizService {
+@Service("BizService")
+public class BizService  implements IBizService{
 	
+	@Autowired
+	@Qualifier("BizDao")
 	private BizDao bizDao;
 	
 	private String sname;
@@ -42,14 +52,24 @@ public class BizService {
 		this.bizDao = bizDao;
 	}
 
-	public String addBook(BookEntity bookEntity){
+	@Override
+	public String addBook(BookForm bookForm){
+			BookEntity bookEntity=new BookEntity();
+			BeanUtils.copyProperties(bookForm, bookEntity);
 			String  result=bizDao.addBook(bookEntity);
 			return result;	
 	}	
 	
-	public List<BookEntity>  findAllBooks(){
+	@Override
+	public List<BookForm>  findAllBooks(){
 		List<BookEntity> bookEntities=bizDao.findBooks();
-		return bookEntities;	
+		List<BookForm> bookForms=new ArrayList<>();
+		for(BookEntity entity:bookEntities){
+			BookForm bookForm=new BookForm();
+			BeanUtils.copyProperties(entity, bookForm);
+			bookForms.add(bookForm);
+		}
+		return bookForms;	
 }	
 
 	public void show(){
