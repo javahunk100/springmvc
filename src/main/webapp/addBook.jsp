@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,33 +16,32 @@
 <img src="${pageContext.request.contextPath}/img/user-icon.png">
   <h2>Book  Form</h2>
    <span style="color:red;font-size: 15px;">${ApplicationMessage}</span>
-  <form class="form-horizontal" action="${pageContext.request.contextPath}/addBook" method="post">
-  
+  <sf:form class="form-horizontal" action="${pageContext.request.contextPath}/addUpdateBook" method="post" commandName="bookForm">
+    <sf:hidden path="bid"/>
    <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+        <sf:input  class="form-control"   path="name" placeholder="Enter name"/>
       </div>
     </div>
   
     <div class="form-group">
       <label class="control-label col-sm-2" for="auther">Author:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="author" placeholder="Enter author" name="author">
+         <sf:input  class="form-control"   path="author" placeholder="Enter author"/>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="mobile">publication:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" id="publication" placeholder="Enter publication" name="publication">
+       <sf:input  class="form-control"   path="publication" placeholder="Enter publication"/>
       </div>
     </div>
    <div class="form-group">
       <label class="control-label col-sm-2" for="price">Price:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" id="price" placeholder="Enter price" name="price">
+       <sf:input  class="form-control"   path="price" placeholder="Enter price"/>
       </div>
-    </div>
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
@@ -52,11 +52,10 @@
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">${ButtonLable}</button>
       </div>
     </div>
-  </form>
+</sf:form>
 </div>
-
 </body>
 </html>

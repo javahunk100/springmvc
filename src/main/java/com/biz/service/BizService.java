@@ -58,7 +58,15 @@ public class BizService  implements IBizService{
 			BeanUtils.copyProperties(bookForm, bookEntity);
 			String  result=bizDao.addBook(bookEntity);
 			return result;	
+	}
+	@Override
+	public String updateBook(BookForm bookForm){
+			BookEntity bookEntity=new BookEntity();
+			BeanUtils.copyProperties(bookForm, bookEntity);
+			String  result=bizDao.updateBook(bookEntity);
+			return result;	
 	}	
+
 	
 	@Override
 	public List<BookForm>  findAllBooks(){
@@ -79,6 +87,19 @@ public class BizService  implements IBizService{
 		System.out.println("_@_@_@_@hmmmmm");
 		System.out.println("_@_@_@_@hmmmmm");
 		
+	}
+
+	@Override
+	public String deleteBookByBid(int bid) {
+		return bizDao.deleteBookByBid(bid);
+	}
+
+	@Override
+	public BookForm findBookByBid(int bid) {
+		BookEntity bookEntity=bizDao.findBookByBid(bid);
+		BookForm bookForm=new BookForm();
+		BeanUtils.copyProperties(bookEntity, bookForm);
+		return bookForm;
 	}
 	
 }

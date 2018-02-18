@@ -34,18 +34,41 @@ public class LIbraryController {
 		return "books"; //  ->>>> /mock.jsp
 	}
 
+
+	@PostMapping("deleteBook")
+	public String deleteBook(@RequestParam("bid") int bid,Model model) {
+		bizService.deleteBookByBid(bid);
+		return "redirect:/books"; //  ->>>> /mock.jsp
+	}
 	
+	@PostMapping("editBook")
+	public String editBook(@RequestParam("bid") int bid,Model model) {
+		BookForm bookForm=bizService.findBookByBid(bid);
+		model.addAttribute("bookForm",bookForm);
+		model.addAttribute("ButtonLable", "Update");
+		return "addBook";
+	}
+
 	@GetMapping("addBook")
 	public String addBook(Model model) {
+		BookForm bookForm=new BookForm();
+		model.addAttribute("bookForm",bookForm);
+		model.addAttribute("ButtonLable", "Add Book");
 		return "addBook"; //  ->>>> /mock.jsp
 	}
 	
-	@PostMapping("addBook")
+	@PostMapping("addUpdateBook")
 	public String addBookSubmit(@ModelAttribute BookForm book,Model model) {
+		String message="";
+		if(book.getBid()==0){
+			bizService.addBook(book);
+			message="Book has been uploaded successfully..............";
+		}else{
+			bizService.updateBook(book);
+			message="Book has been updated successfully..............";
+		}
 		System.out.println(book);
-		bizService.addBook(book);
-		model.addAttribute("ApplicationMessage", "Book has been uploaded successfully..............");
-		return "addBook"; //  ->>>> /mock.jsp
+		return "redirect:/books?message="+message; //  ->>>> /mock.jsp
 	}
 	
 	

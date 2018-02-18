@@ -1,7 +1,6 @@
 package com.biz.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -93,11 +92,49 @@ public class BizDao  implements IBizDao{
 	}
 	
 	@Override
+	public String updateBook(BookEntity	 book){
+		//connection
+		//who is setting the value inside the query
+		//who is creating statement here 
+		//who is firing the query 
+		//who is doing exception handling 
+		//who is doing transaction management 
+		// who is iterating the result set
+		//who is converting the result data into java object
+		//What we are doing here?
+		//writing the query and preparing the data
+		String sql="update book_tbl set name=?,author=?,publication=?,price=? where bid=?";
+		Object[] data=new Object[]{book.getName(),book.getAuthor(),book.getPublication(),book.getPrice(),book.getBid()};
+		jdbcTemplate.update(sql,data);
+		System.out.println("This is updateBook method............");
+		System.out.println(book);
+		return "success";
+	}
+	
+	
+	
+	@Override
+	public BookEntity findBookByBid(int bid){
+		//writing the query and preparing the data
+		String sql="select bid,name,author,publication,price,doe from  book_tbl where bid="+bid;
+		BookEntity book=(BookEntity)jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper(BookEntity.class));
+		return book;
+	}
+	
+	@Override
 	public List<BookEntity> findBooks(){
 		//writing the query and preparing the data
 		String sql="select bid,name,author,publication,price,doe from  book_tbl";
 		List<BookEntity> books=jdbcTemplate.query(sql,new BeanPropertyRowMapper(BookEntity.class));
 		return books;
+	}
+	
+	@Override
+	public String deleteBookByBid(int bid){
+		//writing the query and preparing the data
+		String sql="delete  from  book_tbl where bid  = "+bid;
+		int rows=jdbcTemplate.update(sql);
+		return rows>0 ? "success":"notdelete";
 	}
 
 }
