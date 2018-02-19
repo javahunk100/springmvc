@@ -11,5 +11,6 @@ public interface IBizDao {
 	public String deleteBookByBid(int bid);
 	public BookEntity findBookByBid(int bid);
 	public String updateBook(BookEntity book);
+	public byte[] findBookPhtotByBid(int bid);
 
 }

@@ -9,6 +9,22 @@ public class BookForm {
 	private String publication;
 	private int price;
 	private Timestamp doe;
+	private byte[] photo;
+	
+
+	/**
+	 * @return the photo
+	 */
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	/**
+	 * @param photo the photo to set
+	 */
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
 
 	/**
 	 * @return the bid

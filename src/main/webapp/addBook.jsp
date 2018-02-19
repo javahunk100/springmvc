@@ -16,7 +16,7 @@
 <img src="${pageContext.request.contextPath}/img/user-icon.png">
   <h2>Book  Form</h2>
    <span style="color:red;font-size: 15px;">${ApplicationMessage}</span>
-  <sf:form class="form-horizontal" action="${pageContext.request.contextPath}/addUpdateBook" method="post" commandName="bookForm">
+  <sf:form class="form-horizontal" action="${pageContext.request.contextPath}/addUpdateBook" method="post" commandName="bookForm" enctype="multipart/form-data">
     <sf:hidden path="bid"/>
    <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
@@ -41,6 +41,13 @@
       <label class="control-label col-sm-2" for="price">Price:</label>
       <div class="col-sm-10">          
        <sf:input  class="form-control"   path="price" placeholder="Enter price"/>
+      </div>
+    </div>
+    
+      <div class="form-group">
+      <label class="control-label col-sm-2" for="price">Image:</label>
+      <div class="col-sm-10">          
+       <input type="file" class="form-control"   name="photo" id= "photo" placeholder="Select one image"/>
       </div>
     </div>
     <div class="form-group">        

@@ -3,6 +3,7 @@ package com.biz.dao;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.SqlLobValue;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Repository;
 
 import com.biz.dao.entity.BookEntity;
@@ -83,9 +87,16 @@ public class BizDao  implements IBizDao{
 		//who is converting the result data into java object
 		//What we are doing here?
 		//writing the query and preparing the data
-		String sql="insert into book_tbl(name,author,publication,price,doe) values(?,?,?,?,?)";
-		Object[] data=new Object[]{book.getName(),book.getAuthor(),book.getPublication(),book.getPrice(),new Timestamp(new Date().getTime())};
-		jdbcTemplate.update(sql,data);
+        LobHandler lobHandler = new DefaultLobHandler();
+        SqlLobValue sqlLobValue=new SqlLobValue(book.getPhoto(),lobHandler);
+        //we have to create array of data type for all the data is inserted...in case image 
+        int[] dataType=new int[] { Types.VARCHAR, Types.VARCHAR,
+                Types.VARCHAR, Types.INTEGER, Types.BLOB,
+                Types.TIMESTAMP};
+        
+		String sql="insert into book_tbl(name,author,publication,price,photo,doe) values(?,?,?,?,?,?)";
+		Object[] data=new Object[]{book.getName(),book.getAuthor(),book.getPublication(),book.getPrice(),sqlLobValue,new Timestamp(new Date().getTime())};
+		jdbcTemplate.update(sql,data,dataType);
 		System.out.println("This is addBook method............");
 		System.out.println(book);
 		return "success";
@@ -111,6 +122,14 @@ public class BizDao  implements IBizDao{
 		return "success";
 	}
 	
+	
+	@Override
+	public byte[] findBookPhtotByBid(int bid){
+		//writing the query and preparing the data
+		String sql="select photo from  book_tbl where bid="+bid;
+		byte[] photo=jdbcTemplate.queryForObject(sql,byte[].class);
+		return photo;
+	}
 	
 	
 	@Override

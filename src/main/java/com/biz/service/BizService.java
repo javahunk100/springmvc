@@ -51,6 +51,12 @@ public class BizService  implements IBizService{
 	public void setBizDao(BizDao bizDao) {
 		this.bizDao = bizDao;
 	}
+	
+
+	@Override
+	public byte[] findBookPhtotByBid(int bid){
+		return bizDao.findBookPhtotByBid(bid);
+	}
 
 	@Override
 	public String addBook(BookForm bookForm){

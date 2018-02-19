@@ -11,5 +11,6 @@ public interface IBizService {
 	public String deleteBookByBid(int bid);
 	public BookForm findBookByBid(int bid);
 	public String updateBook(BookForm bookForm);
+	public byte[] findBookPhtotByBid(int bid);
 
 }

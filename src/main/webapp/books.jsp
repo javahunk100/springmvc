@@ -47,6 +47,7 @@
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Email</th>
+         <th>Photo</th>
          <th>Action</th>
       </tr>
     </thead>
@@ -56,6 +57,7 @@
         <td>${item.bid}</td>
         <td>${item.name}</td>
         <td>${item.publication}</td>
+           <td><img src="${pageContext.request.contextPath}/find-book-image?bid=${item.bid}" style="height: 40px;"/></td>
                 <td><a href="javascript:deleteBook(${item.bid})"><img src="${pageContext.request.contextPath}/img/delete.png" style="height: 32px;"></a>
                 	/<a href="javascript:editBook(${item.bid})"><img src="${pageContext.request.contextPath}/img/edit.png" style="height: 20px;"></a>
                 </td>
