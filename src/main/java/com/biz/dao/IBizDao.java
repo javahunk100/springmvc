@@ -12,5 +12,6 @@ public interface IBizDao {
 	public BookEntity findBookByBid(int bid);
 	public String updateBook(BookEntity book);
 	public byte[] findBookPhtotByBid(int bid);
+	public List<String> findPublications();
 
 }

@@ -34,7 +34,10 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="mobile">publication:</label>
       <div class="col-sm-10">          
-       <sf:input  class="form-control"   path="publication" placeholder="Enter publication"/>
+      <%--  <sf:input  class="form-control"   path="publication" placeholder="Enter publication"/> --%>
+           <sf:select  class="form-control"   path="publication">
+           	  <sf:options items="${publications}"/>
+           </sf:select>
       </div>
     </div>
    <div class="form-group">

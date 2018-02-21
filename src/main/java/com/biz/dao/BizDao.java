@@ -122,6 +122,14 @@ public class BizDao  implements IBizDao{
 		return "success";
 	}
 	
+	@Override
+	public List<String> findPublications(){
+		//writing the query and preparing the data
+		String sql="select pubname from  publications_tbl";
+		List<String> plist=jdbcTemplate.queryForList(sql,String.class);
+		return plist;
+	}
+	
 	
 	@Override
 	public byte[] findBookPhtotByBid(int bid){

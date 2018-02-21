@@ -12,5 +12,6 @@ public interface IBizService {
 	public BookForm findBookByBid(int bid);
 	public String updateBook(BookForm bookForm);
 	public byte[] findBookPhtotByBid(int bid);
+	public List<String> findPublications();
 
 }

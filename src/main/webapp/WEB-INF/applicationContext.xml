@@ -12,7 +12,7 @@
             http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
             	<import resource="data-source.xml"/>
                 <import resource="file-upload-spring.xml"/>
+                <import resource="spring-tx-config.xml"/>
                 <context:component-scan base-package="com.biz.dao"/>
                   <context:component-scan base-package="com.biz.service"/>
-                 
           </beans>  

@@ -96,7 +96,7 @@ public class LIbraryController {
 			bizService.updateBook(book);
 			message="Book has been updated successfully..............";
 		}
-		System.out.println(book);
+		//System.out.println(book);
 		return "redirect:/books?message="+message; //  ->>>> /mock.jsp
 	}
 	
@@ -128,6 +128,11 @@ public class LIbraryController {
 	                   // now Spring knows how to handle multipart object and convert them
    }
 
+	@ModelAttribute("publications")
+	public List<String> loadPublications() {
+		List<String> publications=bizService.findPublications();
+		return publications;
+	}
 	
 
 }

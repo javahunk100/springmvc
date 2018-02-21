@@ -8,6 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.biz.dao.BizDao;
 import com.biz.dao.entity.BookEntity;
@@ -37,7 +40,6 @@ public class BizService  implements IBizService{
 	}
 
 
-
 	/**
 	 * @return the bizDao
 	 */
@@ -52,6 +54,10 @@ public class BizService  implements IBizService{
 		this.bizDao = bizDao;
 	}
 	
+	@Override
+	public List<String> findPublications(){
+		return bizDao.findPublications();
+	}
 
 	@Override
 	public byte[] findBookPhtotByBid(int bid){
@@ -59,13 +65,24 @@ public class BizService  implements IBizService{
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public String addBook(BookForm bookForm){
-			BookEntity bookEntity=new BookEntity();
+		    boolean b=TransactionSynchronizationManager.isActualTransactionActive();
+			if(b){
+				System.out.println(")######################################TX is working #############");;
+			}
+		    BookEntity bookEntity=new BookEntity();
 			BeanUtils.copyProperties(bookForm, bookEntity);
-			String  result=bizDao.addBook(bookEntity);
+			  String result=bizDao.addBook(bookEntity);
+			  result=bizDao.addBook(bookEntity); //Runtime Exception comes then transaction will be roleback
+			  result=bizDao.addBook(bookEntity);
+			  result=bizDao.addBook(bookEntity);
+			  result=bizDao.addBook(bookEntity);
 			return result;	
 	}
+	
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public String updateBook(BookForm bookForm){
 			BookEntity bookEntity=new BookEntity();
 			BeanUtils.copyProperties(bookForm, bookEntity);
@@ -96,6 +113,7 @@ public class BizService  implements IBizService{
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public String deleteBookByBid(int bid) {
 		return bizDao.deleteBookByBid(bid);
 	}
